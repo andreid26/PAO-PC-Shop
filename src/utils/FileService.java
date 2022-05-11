@@ -8,15 +8,15 @@ import java.util.List;
 import java.util.Scanner;
 
 public class FileService {
-    private static FileService fileReader = null;
+    private static FileService fileService = null;
 
     private FileService() {}
 
-    public static FileService getFileReader() {
-        if (fileReader == null) {
-            fileReader = new FileService();
+    public static FileService getFileService() {
+        if (fileService == null) {
+            fileService = new FileService();
         }
-        return fileReader;
+        return fileService;
     }
 
     public List<String> readFromCsv(String fileName) {

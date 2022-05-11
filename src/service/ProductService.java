@@ -16,13 +16,13 @@ public class ProductService {
     public ProductService() {
         this.products = new ArrayList<Product>();
         this.helper = new Helper();
-        this.fileService = FileService.getFileReader();
+        this.fileService = FileService.getFileService();
     }
 
     public ProductService(List<Product> products) {
         this.products = products;
         this.helper = new Helper();
-        this.fileService = FileService.getFileReader();
+        this.fileService = FileService.getFileService();
     }
 
     public List<Product> getProducts() {

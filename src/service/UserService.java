@@ -14,13 +14,13 @@ public class UserService {
     public UserService() {
         this.users = new TreeSet<User>();
         this.helper = new Helper();
-        this.fileService = FileService.getFileReader();
+        this.fileService = FileService.getFileService();
     }
 
     public UserService(TreeSet<User> users) {
         this.users = users;
         this.helper = new Helper();
-        this.fileService = FileService.getFileReader();
+        this.fileService = FileService.getFileService();
     }
 
     public TreeSet<User> getUsers() {

@@ -16,13 +16,13 @@ public class OrderService {
     public OrderService() {
         this.orders = new ArrayList<Order>();
         this.helper = new Helper();
-        this.fileService = FileService.getFileReader();
+        this.fileService = FileService.getFileService();
     }
 
     public OrderService(List<Order> orders) {
         this.orders = orders;
         this.helper = new Helper();
-        this.fileService = FileService.getFileReader();
+        this.fileService = FileService.getFileService();
     }
 
     public List<Order> getOrders() {
