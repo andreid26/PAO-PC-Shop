@@ -41,7 +41,7 @@ public class UserService {
     // ADD USERS FROM CSV
 
     public void initializeUsers() {
-        this.fileService.logEvent("Initialized users list");
+        this.fileService.logEvent("Reading from file user.csv");
         List<String> lines = this.fileService.readFromCsv("user.csv");
         this.addUsersFromCsv(lines);
     }
@@ -66,8 +66,8 @@ public class UserService {
             System.out.println("This email already exists.");
         } else {
             this.users.add(user);
+            this.fileService.logEvent("Writing to file user.csv");
             this.writeUserToCsv(user);
-            this.fileService.logEvent("Added a new user");
         }
     }
 

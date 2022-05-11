@@ -1,4 +1,15 @@
-Initialized products list - 2022/05/11 14:16:12
-Initialized users list - 2022/05/11 14:16:12
-Initialized products list - 2022/05/11 14:21:28
-Initialized users list - 2022/05/11 14:21:28
+
+Reading from file gpu.csv - 2022/05/11 17:48:41
+Reading from file case.csv - 2022/05/11 17:48:41
+Reading from file ram.csv - 2022/05/11 17:48:41
+Reading from file user.csv - 2022/05/11 17:48:41
+Reading from file gpu.csv - 2022/05/11 17:51:20
+Reading from file case.csv - 2022/05/11 17:51:20
+Reading from file ram.csv - 2022/05/11 17:51:20
+Reading from file user.csv - 2022/05/11 17:51:20
+Reading from file gpu.csv - 2022/05/11 17:51:35
+Reading from file case.csv - 2022/05/11 17:51:35
+Reading from file ram.csv - 2022/05/11 17:51:35
+Reading from file user.csv - 2022/05/11 17:51:35
+Added a new product - 2022/05/11 17:51:35
+Writing to file case.csv.csv - 2022/05/11 17:51:35

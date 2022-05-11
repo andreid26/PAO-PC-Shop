@@ -44,11 +44,11 @@ public class ProductService {
     // ADD PRODUCTS FROM CSV
 
     public void initializeProducts() {
-        this.fileService.logEvent("Initialized products list");
         List<String> files = Arrays.asList("gpu", "case", "ram");
         List<String> lines;
 
         for(String fileName: files) {
+            this.fileService.logEvent("Reading from file " + fileName + ".csv");
             lines = this.fileService.readFromCsv(fileName + ".csv");
             this.addProductsFromCsv(lines, fileName);
         }
@@ -91,6 +91,7 @@ public class ProductService {
         }
 
         if (props.length() > 0) {
+            this.fileService.logEvent("Writing to file " + fileName + ".csv");
             this.fileService.writeToFile(fileName, props);
         }
     }

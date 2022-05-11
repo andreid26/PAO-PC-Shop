@@ -26,8 +26,12 @@ public class FileService {
             Scanner scanner = new Scanner(file);
 
             while(scanner.hasNextLine()) {
-                lines.add(scanner.nextLine());
+                String line = scanner.nextLine();
+                if (line.length() > 0) {
+                    lines.add(line.replace("\n", "").replace("\r", ""));
+                }
             }
+            scanner.close();
         } catch (FileNotFoundException e) {
             System.out.println("Exception - " + e);
         }
