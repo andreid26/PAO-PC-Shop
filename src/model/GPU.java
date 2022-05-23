@@ -6,16 +6,18 @@ import java.util.List;
 public class GPU extends Product {
     private int memory;
     private int portsNumber;
+    private int id;
 
     public GPU() {
         this.memory = 0;
         this.portsNumber = 0;
     }
 
-    public GPU(String name, String description, String brand, float price, int memory, int portsNumber) {
+    public GPU(String name, String description, String brand, float price, int memory, int portsNumber, int id) {
         super(name, description, brand, price);
         this.memory = memory;
         this.portsNumber = portsNumber;
+        this.id = id;
     }
 
     public int getMemory() {
@@ -34,6 +36,14 @@ public class GPU extends Product {
         this.portsNumber = portsNumber;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     @Override
     public String toString() {
         return  super.toString() + "model.GPU{" +
@@ -43,7 +53,7 @@ public class GPU extends Product {
     }
 
     public String getPropertiesString() {
-        List<String> props = Arrays.asList(this.name, this.description, this.brand, String.valueOf(this.price), String.valueOf(this.memory), String.valueOf(this.portsNumber));
+        List<String> props = Arrays.asList(this.name, this.description, this.brand, String.valueOf(this.price), String.valueOf(this.memory), String.valueOf(this.portsNumber), String.valueOf(this.id));
         return String.join(",", props);
     }
 }

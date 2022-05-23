@@ -1,28 +1,35 @@
 package service;
 
 import model.*;
+import repository.ProductRepository;
 import utils.AscendingPriceComparator;
 import utils.DescendingPriceComparator;
 import utils.FileService;
 import utils.Helper;
 
+import java.sql.SQLException;
 import java.util.*;
 
 public class ProductService {
     private List<Product> products;
     private Helper helper;
     private FileService fileService;
+    private ProductRepository productRepository;
 
-    public ProductService() {
+    public ProductService() throws SQLException {
         this.products = new ArrayList<Product>();
         this.helper = new Helper();
         this.fileService = FileService.getFileService();
+        this.productRepository = new ProductRepository();
+        this.initializeProducts();
     }
 
-    public ProductService(List<Product> products) {
+    public ProductService(List<Product> products) throws SQLException {
         this.products = products;
         this.helper = new Helper();
         this.fileService = FileService.getFileService();
+        this.productRepository = new ProductRepository();
+        this.initializeProducts();
     }
 
     public List<Product> getProducts() {
@@ -49,8 +56,8 @@ public class ProductService {
 
         for(String fileName: files) {
             this.fileService.logEvent("Reading from file " + fileName + ".csv");
-            lines = this.fileService.readFromCsv(fileName + ".csv");
-            this.addProductsFromCsv(lines, fileName);
+            List<Product> products = this.productRepository.getAll();
+            this.setProducts(products);
         }
     }
 
@@ -60,15 +67,15 @@ public class ProductService {
 
             switch (type.toLowerCase()) {
                 case "gpu":
-                    GPU gpu = new GPU(properties[0], properties[1], properties[2], Float.parseFloat(properties[3]), Integer.parseInt(properties[4]), Integer.parseInt(properties[5]));
+                    GPU gpu = new GPU(properties[0], properties[1], properties[2], Float.parseFloat(properties[3]), Integer.parseInt(properties[4]), Integer.parseInt(properties[5]), 0);
                     this.products.add(gpu);
                     break;
                 case "case":
-                    Case _case = new Case(properties[0], properties[1], properties[2], Float.parseFloat(properties[3]), Integer.parseInt(properties[4]), Boolean.parseBoolean(properties[5]), properties[6]);
+                    Case _case = new Case(properties[0], properties[1], properties[2], Float.parseFloat(properties[3]), Integer.parseInt(properties[4]), Boolean.parseBoolean(properties[5]), properties[6], 0);
                     this.products.add(_case);
                     break;
                 case "ram":
-                    RAM ram = new RAM(properties[0], properties[1], properties[2], Float.parseFloat(properties[3]), properties[4], Integer.parseInt(properties[5]));
+                    RAM ram = new RAM(properties[0], properties[1], properties[2], Float.parseFloat(properties[3]), properties[4], Integer.parseInt(properties[5]), 0);
                     this.products.add(ram);
                     break;
             }
@@ -118,7 +125,8 @@ public class ProductService {
         this.fileService.logEvent("Added a new product");
         this.products.add(product);
         this.products.sort(new AscendingPriceComparator());
-        this.writeProductToCsv(product);
+        this.saveProduct(product);
+        this.initializeProducts();
     }
 
     public void addProducts(Product... products) {
@@ -126,6 +134,16 @@ public class ProductService {
             this.addProduct(product);
         }
         this.products.sort(new AscendingPriceComparator());
+    }
+
+    public void saveProduct(Product product) {
+        if (product instanceof Case) {
+            this.productRepository.saveCase((Case) product, false);
+        } else if (product instanceof GPU) {
+            this.productRepository.saveGpu((GPU) product, false);
+        } else if (product instanceof RAM) {
+            this.productRepository.saveRam((RAM) product, false);
+        }
     }
 
     // SEARCH
@@ -150,6 +168,30 @@ public class ProductService {
         this.fileService.logEvent("Got ordered products");
         if(ascending) return this.orderProductsAscending();
         return this.orderProductsDescending();
+    }
+
+    // UPDATE
+
+    public void updateProduct(Product product) {
+        if (product instanceof Case) {
+            this.productRepository.saveCase((Case) product, true);
+        } else if (product instanceof GPU) {
+            this.productRepository.saveGpu((GPU) product, true);
+        } else if (product instanceof RAM) {
+            this.productRepository.saveRam((RAM) product, true);
+        }
+    }
+
+    // DELETE
+
+    public void deleteProduct(Product product) {
+        if (product instanceof Case) {
+            this.productRepository.delete("_case", ((Case) product).getId());
+        } else if (product instanceof GPU) {
+            this.productRepository.delete("gpu", ((GPU) product).getId());
+        } else if (product instanceof RAM) {
+            this.productRepository.delete("ram", ((RAM) product).getId());
+        }
     }
 
 }

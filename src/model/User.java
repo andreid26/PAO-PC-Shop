@@ -11,6 +11,7 @@ public class User implements Comparable<User> {
     private String address;
     private String phoneNumber;
     private int bornYear;
+    private int id;
 
     public User() {
         this.firstName = "";
@@ -21,13 +22,14 @@ public class User implements Comparable<User> {
         this.bornYear = 0;
     }
 
-    public User(String firstName, String lastName, String email, String address, String phoneNumber, int bornYear) {
+    public User(String firstName, String lastName, String email, String address, String phoneNumber, int bornYear, int id) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.bornYear = bornYear;
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -78,6 +80,14 @@ public class User implements Comparable<User> {
         this.bornYear = bornYear;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public void read() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("User first name: ");
@@ -103,6 +113,7 @@ public class User implements Comparable<User> {
                 ", address='" + address + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", bornYear=" + bornYear +
+                ", id=" + id +
                 '}';
     }
 
@@ -115,7 +126,7 @@ public class User implements Comparable<User> {
     }
 
     public String getPropertiesString() {
-        List<String> props = Arrays.asList(this.firstName, this.lastName, this.email, this.address, this.phoneNumber, String.valueOf(this.bornYear));
+        List<String> props = Arrays.asList(this.firstName, this.lastName, this.email, this.address, this.phoneNumber, String.valueOf(this.bornYear), String.valueOf(this.id));
         return String.join(",", props);
     }
 }
