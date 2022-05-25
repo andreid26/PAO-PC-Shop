@@ -8,18 +8,20 @@ import java.util.TreeSet;
 
 public class Helper {
 
-    public boolean emailAlreadyExists(String email, TreeSet<User> users) {
+    private Helper() {}
+
+    public static boolean emailAlreadyExists(String email, TreeSet<User> users) {
         for(User user: users) {
             if (user.getEmail().toLowerCase().equals(email.toLowerCase())) return true;
         }
         return false;
     }
 
-    public boolean areStringsSimilar(String first, String second) {
+    public static boolean areStringsSimilar(String first, String second) {
         return first.toLowerCase().contains(second.toLowerCase());
     }
 
-    public boolean areStringsEqual(String first, String second) {
+    public static boolean areStringsEqual(String first, String second) {
         return first.equalsIgnoreCase(second);
     }
 

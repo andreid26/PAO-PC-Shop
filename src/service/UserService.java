@@ -10,13 +10,11 @@ import java.util.*;
 
 public class UserService {
     private TreeSet<User> users;
-    private Helper helper;
     private FileService fileService;
     private UserRepository userRepository;
 
     public UserService() throws SQLException {
         this.users = new TreeSet<User>();
-        this.helper = new Helper();
         this.fileService = FileService.getFileService();
         this.userRepository = new UserRepository();
         this.initializeUsers();
@@ -24,7 +22,6 @@ public class UserService {
 
     public UserService(TreeSet<User> users) throws SQLException {
         this.users = users;
-        this.helper = new Helper();
         this.fileService = FileService.getFileService();
         this.userRepository = new UserRepository();
         this.initializeUsers();
@@ -69,7 +66,7 @@ public class UserService {
     // ADD
 
     public void addUser(User user) {
-        if (this.helper.emailAlreadyExists(user.getEmail(), this.users)) {
+        if (Helper.emailAlreadyExists(user.getEmail(), this.users)) {
             System.out.println("This email already exists.");
         } else {
             this.users.add(user);
@@ -87,7 +84,7 @@ public class UserService {
 
     public void addUsers(User... users) {
         for(User user: users) {
-            if (this.helper.emailAlreadyExists(user.getEmail(), this.users)) {
+            if (Helper.emailAlreadyExists(user.getEmail(), this.users)) {
                 System.out.println("model.User with email " + user.getEmail() + " already exists.");
             } else {
                 this.addUser(user);
@@ -100,7 +97,7 @@ public class UserService {
     public User searchUserByEmail(String email) {
         this.fileService.logEvent("Searched user by email");
         for(User user: this.users) {
-            if (this.helper.areStringsEqual(user.getEmail(), email)) return user;
+            if (Helper.areStringsEqual(user.getEmail(), email)) return user;
         }
         return null;
     }

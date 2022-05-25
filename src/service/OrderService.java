@@ -10,18 +10,15 @@ import java.util.*;
 
 public class OrderService {
     private List<Order> orders;
-    private Helper helper;
     private FileService fileService;
 
     public OrderService() {
         this.orders = new ArrayList<Order>();
-        this.helper = new Helper();
         this.fileService = FileService.getFileService();
     }
 
     public OrderService(List<Order> orders) {
         this.orders = orders;
-        this.helper = new Helper();
         this.fileService = FileService.getFileService();
     }
 
@@ -74,9 +71,9 @@ public class OrderService {
             users.add(order.getUser());
         }
 
-        if (this.helper.emailAlreadyExists(email, users)) {
+        if (Helper.emailAlreadyExists(email, users)) {
             for(Order order: this.orders) {
-                if (this.helper.areStringsEqual(order.getUser().getEmail(), email)) {
+                if (Helper.areStringsEqual(order.getUser().getEmail(), email)) {
                     ordersFound.add(order);
                 }
             }
@@ -94,9 +91,9 @@ public class OrderService {
             users.add(order.getUser());
         }
 
-        if(this.helper.emailAlreadyExists(email, users)) {
+        if(Helper.emailAlreadyExists(email, users)) {
             for(Order order: this.orders) {
-                if (this.helper.areStringsEqual(order.getUser().getEmail(), email)) {
+                if (Helper.areStringsEqual(order.getUser().getEmail(), email)) {
                     return this.getTotalFromOrder(order);
                 }
             }

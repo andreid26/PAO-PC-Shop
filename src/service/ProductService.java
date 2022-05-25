@@ -12,13 +12,11 @@ import java.util.*;
 
 public class ProductService {
     private List<Product> products;
-    private Helper helper;
     private FileService fileService;
     private ProductRepository productRepository;
 
     public ProductService() throws SQLException {
         this.products = new ArrayList<Product>();
-        this.helper = new Helper();
         this.fileService = FileService.getFileService();
         this.productRepository = new ProductRepository();
         this.initializeProducts();
@@ -26,7 +24,6 @@ public class ProductService {
 
     public ProductService(List<Product> products) throws SQLException {
         this.products = products;
-        this.helper = new Helper();
         this.fileService = FileService.getFileService();
         this.productRepository = new ProductRepository();
         this.initializeProducts();
@@ -155,7 +152,7 @@ public class ProductService {
         for(Product product: this.products) {
             String productName = product.getName();
 
-            if (this.helper.areStringsSimilar(productName, name)) {
+            if (Helper.areStringsSimilar(productName, name)) {
                 productsFound.add(product);
             }
         }

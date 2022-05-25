@@ -81,3 +81,11 @@ Added a new product - 2022/05/23 22:26:23
 Reading from file gpu.csv - 2022/05/23 22:26:23
 Reading from file case.csv - 2022/05/23 22:26:23
 Reading from file ram.csv - 2022/05/23 22:26:23
+Reading from file gpu.csv - 2022/05/23 22:27:20
+Reading from file case.csv - 2022/05/23 22:27:20
+Reading from file ram.csv - 2022/05/23 22:27:20
+Reading from file user.csv - 2022/05/23 22:27:20
+Added a new product - 2022/05/23 22:27:20
+Reading from file gpu.csv - 2022/05/23 22:27:20
+Reading from file case.csv - 2022/05/23 22:27:20
+Reading from file ram.csv - 2022/05/23 22:27:20
